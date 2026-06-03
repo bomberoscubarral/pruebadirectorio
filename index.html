@@ -1042,6 +1042,154 @@
 
     }
 
+    .share-section{
+
+  margin-top:42px;
+
+  background:white;
+
+  border-radius:30px;
+
+  padding:36px 28px;
+
+  text-align:center;
+
+  box-shadow:
+  0 14px 35px rgba(0,0,0,0.08);
+
+}
+
+.share-section h3{
+
+  font-size:1.5rem;
+
+  margin-bottom:12px;
+
+}
+
+.share-section p{
+
+  color:#6b7280;
+
+  margin-bottom:22px;
+
+  line-height:1.7;
+
+}
+    
+/* ==========================================
+   COMPARTIR DIRECTORIO
+========================================== */
+.share-main-btn{
+
+  background:
+  linear-gradient(
+  135deg,
+  #2563eb,
+  #1d4ed8
+  );
+
+  color:white;
+
+  border:none;
+
+  padding:14px 24px;
+
+  border-radius:16px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+}
+
+.share-modal{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+  rgba(0,0,0,0.6);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:999999;
+
+}
+
+.share-modal-content{
+
+  background:white;
+
+  width:92%;
+
+  max-width:420px;
+
+  border-radius:24px;
+
+  padding:28px;
+
+  text-align:center;
+
+  position:relative;
+
+}
+
+.share-qr{
+
+  width:220px;
+
+  height:220px;
+
+  object-fit:contain;
+
+  margin:18px auto;
+
+  display:block;
+
+}
+
+.close-share{
+
+  position:absolute;
+
+  top:12px;
+
+  right:12px;
+
+  border:none;
+
+  background:none;
+
+  font-size:2rem;
+
+  cursor:pointer;
+
+}
+
+.share-action-btn{
+
+  width:100%;
+
+  margin-top:12px;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+}
+
     .social-icons{
 
       display:flex;
@@ -1943,6 +2091,30 @@
 
     </section>
 
+    <!-- COMPARTIR DIRECTORIO -->
+
+<section class="share-section">
+
+  <h3>
+    📲 Compartir Directorio
+  </h3>
+
+  <p>
+    Ayuda a que más personas tengan acceso rápido a los servicios de emergencia de Cubarral.
+  </p>
+
+  <button
+    class="share-main-btn"
+    onclick="openShareModal()">
+
+    <i class="fa-solid fa-share-nodes"></i>
+
+    Compartir Directorio
+
+  </button>
+
+</section>
+
     <!-- REDES SOCIALES -->
 
     <section class="social-section">
@@ -2253,6 +2425,67 @@ La aplicación quedará instalada y podrá utilizarse sin conexión.`
 
   }
 );
+
+    const DIRECTORY_URL =
+"https://bomberoscubarral.github.io/directoriodigitaldeemergenciascubarralmeta/";
+
+function openShareModal(){
+
+  document.getElementById(
+    "shareModal"
+  ).style.display = "flex";
+
+}
+
+function closeShareModal(){
+
+  document.getElementById(
+    "shareModal"
+  ).style.display = "none";
+
+}
+
+async function shareDirectory(){
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share({
+
+        title:
+        "Directorio Digital de Emergencias",
+
+        text:
+        "Directorio Digital de Emergencias de Cubarral Meta",
+
+        url:
+        DIRECTORY_URL
+
+      });
+
+    }catch(error){}
+
+  }else{
+
+    copyDirectoryLink();
+
+  }
+
+}
+
+function copyDirectoryLink(){
+
+  navigator.clipboard.writeText(
+    DIRECTORY_URL
+  );
+
+  showToast(
+    "Enlace copiado correctamente"
+  );
+
+}
+    
     // ACTUALIZAR AUTOMATICAMENTE
 
     navigator.serviceWorker?.addEventListener(
@@ -2266,6 +2499,60 @@ La aplicación quedará instalada y podrá utilizarse sin conexión.`
 
 
   </script>
+
+  <!-- MODAL COMPARTIR -->
+
+<div
+  id="shareModal"
+  class="share-modal">
+
+  <div class="share-modal-content">
+
+    <button
+      class="close-share"
+      onclick="closeShareModal()">
+
+      ×
+
+    </button>
+
+    <h3>
+      Compartir Directorio
+    </h3>
+
+    <p>
+      Directorio Digital de Emergencias
+      Cubarral Meta
+    </p>
+
+    <img
+      src="qr-directorio.png"
+      alt="Código QR Directorio"
+      class="share-qr">
+
+    <p>
+      Escanee o comparta el enlace para acceder al directorio.
+    </p>
+
+    <button
+      class="share-action-btn"
+      onclick="shareDirectory()">
+
+      📤 Compartir
+
+    </button>
+
+    <button
+      class="share-action-btn"
+      onclick="copyDirectoryLink()">
+
+      📋 Copiar enlace
+
+    </button>
+
+  </div>
+
+</div>
 
 </body>
 
