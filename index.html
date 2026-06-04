@@ -2524,22 +2524,28 @@ function copyDirectoryLink(){
   );
 
 }
-    const shareModal =
-  document.getElementById(
-    "shareModal"
-  );
+    window.addEventListener(
+  "load",
+  () => {
 
-shareModal.onclick = function(e){
+    document
+      .getElementById(
+        "shareModal"
+      )
+      .onclick = function(e){
 
-  if(
-    e.target === shareModal
-  ){
+        if(
+          e.target === this
+        ){
 
-    closeShareModal();
+          closeShareModal();
+
+        }
+
+      };
 
   }
-
-};
+);
     
     // ACTUALIZAR AUTOMATICAMENTE
 
