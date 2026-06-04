@@ -1,4 +1,4 @@
-const CACHE_NAME = "directorio-emergencias-v2.2";
+const CACHE_NAME = "directorio-emergencias-v2.4";
 
 const urlsToCache = [
   "./",
