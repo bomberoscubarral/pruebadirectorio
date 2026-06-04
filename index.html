@@ -1124,16 +1124,21 @@
 
   visibility:hidden;
 
+  pointer-events:none;
+
   transition:
   opacity .30s ease,
   visibility .30s ease;
 
 }
-    .share-modal.active{
+
+.share-modal.active{
 
   opacity:1;
 
   visibility:visible;
+
+  pointer-events:auto;
 
 }
 
@@ -2524,20 +2529,17 @@ function copyDirectoryLink(){
     "shareModal"
   );
 
-shareModal.addEventListener(
-  "click",
-  (e) => {
+shareModal.onclick = function(e){
 
-    if (
-      e.target === shareModal
-    ) {
+  if(
+    e.target === shareModal
+  ){
 
-      closeShareModal();
-
-    }
+    closeShareModal();
 
   }
-);
+
+};
     
     // ACTUALIZAR AUTOMATICAMENTE
 
