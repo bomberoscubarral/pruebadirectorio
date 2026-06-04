@@ -2519,17 +2519,18 @@ function copyDirectoryLink(){
   );
 
 }
-    document
-.getElementById(
-  "shareModal"
-)
-.addEventListener(
-  "click",
-  function(e){
+    const shareModal =
+  document.getElementById(
+    "shareModal"
+  );
 
-    if(
-      e.target === this
-    ){
+shareModal.addEventListener(
+  "click",
+  (e) => {
+
+    if (
+      e.target === shareModal
+    ) {
 
       closeShareModal();
 
