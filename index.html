@@ -1112,13 +1112,28 @@
   background:
   rgba(0,0,0,0.6);
 
-  display:none;
+  display:flex;
 
   align-items:center;
 
   justify-content:center;
 
   z-index:999999;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  transition:
+  opacity .30s ease,
+  visibility .30s ease;
+
+}
+    .share-modal.active{
+
+  opacity:1;
+
+  visibility:visible;
 
 }
 
@@ -1137,6 +1152,17 @@
   text-align:center;
 
   position:relative;
+
+  transform:scale(.90);
+
+  transition:
+  transform .30s ease;
+
+}
+    .share-modal.active
+.share-modal-content{
+
+  transform:scale(1);
 
 }
 
@@ -2431,17 +2457,25 @@ La aplicación quedará instalada y podrá utilizarse sin conexión.`
 
 function openShareModal(){
 
-  document.getElementById(
-    "shareModal"
-  ).style.display = "flex";
+  document
+    .getElementById(
+      "shareModal"
+    )
+    .classList.add(
+      "active"
+    );
 
 }
 
 function closeShareModal(){
 
-  document.getElementById(
-    "shareModal"
-  ).style.display = "none";
+  document
+    .getElementById(
+      "shareModal"
+    )
+    .classList.remove(
+      "active"
+    );
 
 }
 
@@ -2485,6 +2519,24 @@ function copyDirectoryLink(){
   );
 
 }
+    document
+.getElementById(
+  "shareModal"
+)
+.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target === this
+    ){
+
+      closeShareModal();
+
+    }
+
+  }
+);
     
     // ACTUALIZAR AUTOMATICAMENTE
 
